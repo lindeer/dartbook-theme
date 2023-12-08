@@ -1,3 +1,3 @@
 ## 1.0.0
 
-- Initial version.
+- Changes for theme resource package.
