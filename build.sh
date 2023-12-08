@@ -11,6 +11,11 @@ function checkCommand() {
 }
 
 checkCommand webdev && checkCommand sass
+resourceDir=$1
+if [ -z "$1" ] || [ ! -d $resourceDir ]; then
+  echo "Invalid theme directory: '$1'"
+  exit -1
+fi
 
 if [ ! -d web/materialize ]; then
   wget -P ~/Downloads https://mirror.ghproxy.com/https://github.com/materializecss/materialize/releases/download/1.2.0/materialize-src-v1.2.0.zip
@@ -31,7 +36,6 @@ cp build/main.dart.js $assetDir/dartbook.js
 cp build/styles.css $assetDir/style.css
 cp -r build/{materialize.js,icons.css,fonts} $assetDir
 
-resourceDir='../lib/theme-res'
 targetAssetDir="$resourceDir/_assets"
 rm -rf $targetAssetDir/website && cp -r $assetDir $targetAssetDir
 cp resource/_layouts/website/*.html $resourceDir/_layouts/website
